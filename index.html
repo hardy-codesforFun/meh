@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello MAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-option {
+            position: absolute;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .no-option:hover {
+            cursor: pointer;
+        }
+
+        .datepicker-container {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input[type="date"] {
+            background-color: #FBB6CE;
+            color: white;
+            border: 2px solid #FBCFE8;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body class="flex justify-center items-center h-screen bg-pink-200 relative">
+
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-pink-600 mb-8">Do you want me?</h1>
+        <div class="space-x-4">
+            <button id="yesBtn"
+                class="px-6 py-3 bg-pink-500 text-white rounded-lg text-xl hover:bg-pink-400 transition duration-200">Yes</button>
+            <button id="noBtn"
+                class="px-6 py-3 bg-white text-pink-500 border-2 border-pink-500 rounded-lg text-xl hover:bg-pink-100 transition duration-200 no-option">No</button>
+        </div>
+    </div>
+
+    <div id="datepickerContainer" class="datepicker-container">
+        <h2 class="text-2xl font-semibold text-pink-600 mb-4">When are you free?</h2>
+        <input type="date" id="datepicker"
+            class="p-2 bg-pink-300 rounded-lg text-white border-none focus:outline-none" />
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const datepickerContainer = document.getElementById('datepickerContainer');
+        const datepicker = document.getElementById('datepicker');
+
+        yesBtn.addEventListener('click', () => {
+            datepickerContainer.style.display = 'block';
+        });
+
+        noBtn.addEventListener('click', () => {
+            noBtn.style.display = 'none';
+        });
+
+        noBtn.addEventListener('mouseover', () => {
+            const maxX = window.innerWidth - noBtn.offsetWidth;  // Max X position considering button width
+            const maxY = window.innerHeight - noBtn.offsetHeight;  // Max Y position considering button height
+
+            // Generate random X and Y positions within the bounds of the viewport
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            // Move the button to the new position
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        })
+
+        datepicker.addEventListener('change', () => {
+            const selectedDate = datepicker.value;
+            if (selectedDate) {
+                // Redirect to the new page after selecting a date
+                window.location.href = `choose_date.html?date=${selectedDate}`;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

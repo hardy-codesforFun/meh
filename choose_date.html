@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose it</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #FCE4EC;
+        }
+
+        .card {
+            background-color: #FBB6CE;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #FBCFE8;
+        }
+
+        .card.selected {
+            border: 4px solid #9C174D;
+            /* Border color when selected */
+        }
+
+        .card img {
+            border-radius: 8px;
+            width: 100%;
+            height: 200px;
+            /* More vertical images */
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #9C174D;
+        }
+
+        .cart-container {
+            display: none;
+            position: fixed;
+            top: 10%;
+            right: 10%;
+            background-color: #FBB6CE;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            z-index: 1000;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #FBCFE8;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            background-color: #FF7A7A;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #FF4C4C;
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #9C174D;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center h-screen">
+
+    <h1 class="text-4xl font-bold text-pink-600 mb-6 mt-10">What kind of date would you like?</h1>
+
+    <!-- Cart Icon -->
+    <div id="cartIcon" class="cart-icon" onclick="toggleCart()">
+        🛒
+    </div>
+
+    <!-- Date Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 w-full">
+        <!-- Evening Walk Card -->
+        <div class="card"
+            onclick="selectDate('Evening Walk', 'https://i.pinimg.com/736x/da/d2/d0/dad2d05f68a4d19d1af3d559c69de90b.jpg')">
+            <img src="https://i.pinimg.com/736x/da/d2/d0/dad2d05f68a4d19d1af3d559c69de90b.jpg" alt="Evening Walk" />
+            <div class="card-title">Evening Walk</div>
+        </div>
+
+        <!-- Movie Date Card -->
+        <div class="card"
+            onclick="selectDate('Movie Date', 'https://i.pinimg.com/736x/b2/0a/25/b20a25d4482ddea4884161f68217bde5.jpg')">
+            <img src="https://i.pinimg.com/736x/b2/0a/25/b20a25d4482ddea4884161f68217bde5.jpg" alt="Movie Date" />
+            <div class="card-title">Movie Date</div>
+        </div>
+
+        <!-- Dinner Date Card -->
+        <div class="card"
+            onclick="selectDate('Dinner Date', 'https://i.pinimg.com/736x/f7/67/ab/f767ab3a38f3afb74bcd3459e93854ba.jpg')">
+            <img src="https://i.pinimg.com/736x/f7/67/ab/f767ab3a38f3afb74bcd3459e93854ba.jpg" alt="Dinner Date" />
+            <div class="card-title">Dinner Date</div>
+        </div>
+
+        <!-- Beach Day Card -->
+        <div class="card"
+            onclick="selectDate('Beach Day', 'https://i.pinimg.com/736x/d3/1b/42/d31b427616437dfaddcb2248cf8c6fb5.jpg')">
+            <img src="https://i.pinimg.com/736x/d3/1b/42/d31b427616437dfaddcb2248cf8c6fb5.jpg" alt="Beach Day" />
+            <div class="card-title">Beach Day</div>
+        </div>
+
+        <!-- Hiking Date Card -->
+        <div class="card" onclick="selectDate('Hiking Date', 'https://example.com/hiking-date.jpg')">
+            <img src="https://i.pinimg.com/736x/c9/ce/05/c9ce052923221f3758b614f7fab51e16.jpg" alt="Hiking Date" />
+            <div class="card-title">Hiking Date</div>
+        </div>
+
+        <!-- Picnic Date Card -->
+        <div class="card" onclick="selectDate('Picnic Date', 'https://example.com/picnic-date.jpg')">
+            <img src="https://i.pinimg.com/736x/98/9f/a1/989fa1f47c16303730464ee59113c22c.jpg" alt="Picnic Date" />
+            <div class="card-title">Picnic Date</div>
+        </div>
+
+        <!-- Amusement Park Card -->
+        <div class="card" onclick="selectDate('Amusement Park', 'https://example.com/amusement-park.jpg')">
+            <img src="https://i.pinimg.com/736x/b5/29/0a/b5290aec65414fa8023181f746a40f33.jpg" alt="Amusement Park" />
+            <div class="card-title">Amusement Park</div>
+        </div>
+
+        <!-- Coffee Date Card -->
+        <div class="card" onclick="selectDate('Coffee Date', 'https://example.com/coffee-date.jpg')">
+            <img src="https://i.pinimg.com/736x/3e/ba/57/3eba5741663fa96117fa7f8e36bd5541.jpg" alt="Coffee Date" />
+            <div class="card-title">Coffee Date</div>
+        </div>
+        <div class="card"
+            onclick="selectDate('Stargazing Date', 'https://i.pinimg.com/736x/29/4f/18/294f18d54c416eb8b4b1c41e7db0efb3.jpg')">
+            <img src="https://i.pinimg.com/736x/d0/e5/d3/d0e5d33dd67e11f26577d6fb4390449b.jpg" alt="Stargazing Date" />
+            <div class="card-title">Stargazing Date</div>
+        </div>
+        <div class="card"
+            onclick="selectDate('Road Trip Date', 'https://i.pinimg.com/736x/4a/1f/2d/4a1f2d6e6be2b8e1b3658b5e0b26a4ad.jpg')">
+            <img src="https://i.pinimg.com/736x/57/9f/9c/579f9c4542156b060f112901b4c5d5b8.jpg" alt="Road Trip Date" />
+            <div class="card-title">Road Trip Date</div>
+        </div>
+        <div class="card"
+            onclick="selectDate('Cooking Date', 'https://i.pinimg.com/736x/4a/1f/2d/4a1f2d6e6be2b8e1b3658b5e0b26a4ad.jpg')">
+            <img src="https://i.pinimg.com/736x/1a/ed/dc/1aeddc14d8b130f29114fa473187f3ef.jpg" alt="Road Trip Date" />
+            <div class="card-title">Cooking Date</div>
+        </div>
+        
+        <div class="card"
+            onclick="selectDate('Jaccuzi Date', 'https://i.pinimg.com/736x/4a/1f/2d/4a1f2d6e6be2b8e1b3658b5e0b26a4ad.jpg')">
+            <img src="https://i.pinimg.com/736x/0a/6f/bb/0a6fbba7198153556bcb26c36844ca19.jpg" alt="Road Trip Date" />
+            <div class="card-title">Jaccuziii Date</div>
+        </div>
+
+
+    </div>
+
+    <!-- Cart Container -->
+    <div id="cartContainer" class="cart-container">
+        <h2 class="text-2xl font-semibold text-pink-600 mb-4">Your Cart</h2>
+        <div id="cartItems" class="space-y-2"></div>
+        <button id="addToCartBtn" class="px-6 py-3 bg-pink-500 text-white rounded-lg text-xl mt-4"
+            onclick="checkout()">Proceed to Checkout</button>
+    </div>
+
+    <script>
+        const cart = [];
+
+        // Retrieve selected date from the URL query parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const selectedDate = getQueryParam('date');
+        document.title = `Date selected: ${selectedDate}`;
+
+        // Function to handle date type selection
+        function selectDate(dateType, imageUrl) {
+            const card = event.currentTarget; // Get the clicked card
+
+            // Toggle the border on selection
+            card.classList.toggle('selected');
+
+            // Check if this date type is already in the cart
+            if (!cart.some(item => item.dateType === dateType)) {
+                cart.push({ dateType, imageUrl });
+                updateCart();
+            } else {
+                alert(`This date type is already in your cart.`);
+            }
+        }
+
+        // Function to update the cart display
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = ''; // Clear current cart items
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.dateType}" class="w-20 h-20 object-cover rounded-lg mr-4" />
+          <span>${item.dateType}</span>
+          <button class="remove-btn" onclick="removeFromCart('${item.dateType}')">Remove</button>
+        `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
+
+        // Function to remove an item from the cart
+        function removeFromCart(dateType) {
+            const index = cart.findIndex(item => item.dateType === dateType);
+            if (index > -1) {
+                cart.splice(index, 1);
+                updateCart();
+            }
+        }
+
+        // Checkout function (display a final message)
+        function checkout() {
+            if (cart.length > 0) {
+                window.location.href = `checkout.html`;
+            } else {
+                alert('Your cart is empty.');
+            }
+        }
+
+        // Toggle the cart display
+        function toggleCart() {
+            const cartContainer = document.getElementById('cartContainer');
+            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+
+</html>

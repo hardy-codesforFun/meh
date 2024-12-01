@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Booking Confirmation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #FCE4EC;
+    }
+
+    .message-box {
+      background-color: #FBB6CE;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .message-box h1 {
+      font-size: 2.5rem;
+      color: #9C174D;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .message-box p {
+      font-size: 1.2rem;
+      color: #7A3B4D;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      font-size: 1.2rem;
+      color: #9C174D;
+      font-weight: 600;
+    }
+
+    .photo-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .photo-container img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #FBB6CE;
+    }
+
+    /* Flower animation */
+    .flower {
+      font-size: 3rem;
+      position: absolute;
+      animation: flowerAnimation 6s infinite ease-in-out;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes flowerAnimation {
+      0% {
+        transform: translateX(-50%) scale(0.8);
+        opacity: 0;
+      }
+      30% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 1;
+      }
+      60% {
+        transform: translateX(-50%) scale(1);
+      }
+      100% {
+        transform: translateX(-50%) scale(0.8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center h-screen justify-center">
+
+  <!-- Animated Flower -->
+  <div class="flower">🌸</div>
+
+  <div class="message-box">
+    <h1>Your Date Has Been Booked!</h1>
+    <p>Thank you, love!</p>
+    <p class="contact-info">Call: <strong>9712792510</strong></p>
+    <p>Find this pretty face there</p>
+    <div class="photo-container">
+      <!-- Replace with your image URL -->
+      <img src="https://i.imgur.com/7a5ri7C.jpeg" alt="Your photo">
+    </div>
+  </div>
+
+</body>
+</html>
